@@ -18,7 +18,7 @@ jobs:
   tofu:
     if: ${{ github.event.pull_request.head.repo.fork != true }}
     runs-on: [ 'Linux' ]
-    name: root
+    name: Deploy DEV
     environment: 'Development'
     steps:
       - name: Checkout
@@ -36,3 +36,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION: 'static_checks'
           GH_STEP_SUMMARY: 'true'
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ON_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ON_AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'eu-central-1'
