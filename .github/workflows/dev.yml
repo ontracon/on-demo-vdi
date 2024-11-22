@@ -64,7 +64,7 @@ jobs:
           TF_ACTION: 'apply'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: destroy
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name== 'workflow_dispatch' }}
         uses: otc-code/action-tofu@main
         with:
           TF_DIR: 'env/dev'
