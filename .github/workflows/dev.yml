@@ -50,3 +50,16 @@ jobs:
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: plan
+        uses: otc-code/action-tofu@main
+        with:
+          TF_DIR: 'env/dev'
+          TF_ACTION: 'plan'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: apply
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: otc-code/action-tofu@main
+        with:
+          TF_DIR: 'stacks/10-base'
+          TF_ACTION: 'apply'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
