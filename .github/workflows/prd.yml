@@ -1,4 +1,4 @@
-name: Development
+name: Production
 on:
   workflow_dispatch:
   pull_request:
@@ -13,7 +13,7 @@ permissions:
   statuses: write
 # Ensures that only one deploy task run at a time.
 concurrency:
-  group: Development
+  group: Production
 
 jobs:
   tofu:
@@ -33,7 +33,7 @@ jobs:
       - name: Static tests
         uses: otc-code/action-tofu@v1.2.2
         with:
-          TF_DIR: 'env/dev'
+          TF_DIR: 'env/prd'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION: 'static_checks'
           GH_STEP_SUMMARY: 'true'
@@ -46,27 +46,27 @@ jobs:
       - name: tofu init (autopilot AWS)
         uses: otc-code/action-tofu@main
         with:
-          TF_DIR: 'env/dev'
+          TF_DIR: 'env/prd'
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: plan
         uses: otc-code/action-tofu@main
         with:
-          TF_DIR: 'env/dev'
+          TF_DIR: 'env/prd'
           TF_ACTION: 'plan'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: apply
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: otc-code/action-tofu@main
         with:
-          TF_DIR: 'env/dev'
+          TF_DIR: 'env/prd'
           TF_ACTION: 'apply'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: destroy
         if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
         uses: otc-code/action-tofu@main
         with:
-          TF_DIR: 'env/dev'
+          TF_DIR: 'env/prd'
           TF_ACTION: 'destroy'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
