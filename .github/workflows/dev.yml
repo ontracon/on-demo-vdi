@@ -60,6 +60,13 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: otc-code/action-tofu@main
         with:
-          TF_DIR: 'stacks/10-base'
+          TF_DIR: 'env/dev'
           TF_ACTION: 'apply'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: destroy
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: otc-code/action-tofu@main
+        with:
+          TF_DIR: 'env/dev'
+          TF_ACTION: 'destroy'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
