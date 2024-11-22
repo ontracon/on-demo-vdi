@@ -3,7 +3,10 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-
+    paths:
+      - 'env/prd/*.tf'
+      - 'env/prd/*.tfvars'
+      - '.github/workflows/prd.yml'
 permissions:
   # required for all workflows
   contents: write
@@ -19,8 +22,8 @@ jobs:
   tofu:
     if: ${{ github.event.pull_request.head.repo.fork != true }}
     runs-on: [ 'Linux' ]
-    name: Deploy DEV
-    environment: 'Development'
+    name: Deploy PRD
+    environment: 'Production'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
