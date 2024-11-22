@@ -41,6 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION: 'static_checks'
           GH_STEP_SUMMARY: 'true'
+          GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
