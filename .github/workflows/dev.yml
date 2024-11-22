@@ -53,7 +53,7 @@ jobs:
           TF_DIR: 'env/dev'
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
       - name: plan
         uses: otc-code/action-tofu@main
         with:
