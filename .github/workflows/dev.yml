@@ -1,0 +1,38 @@
+name: Development
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  # required for all workflows
+  contents: write
+  checks: write
+  pull-requests: write
+  discussions: write
+  statuses: write
+# Ensures that only one deploy task run at a time.
+concurrency:
+  group: Development
+
+jobs:
+  tofu:
+    if: ${{ github.event.pull_request.head.repo.fork != true }}
+    runs-on: [ 'Linux' ]
+    name: root
+    environment: 'Development'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check Installation
+        uses: otc-code/action-tofu@v1.2.2
+        with:
+          TF_ACTION: 'install'
+        env:
+          GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Static tests
+        uses: otc-code/action-tofu@v1.2.2
+        with:
+          TF_DIR: 'env/dev'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TF_ACTION: 'static_checks'
+          GH_STEP_SUMMARY: 'true'
