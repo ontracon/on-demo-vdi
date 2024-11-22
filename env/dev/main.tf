@@ -9,14 +9,14 @@ resource "random_password" "this" {
 }
 
 module "dev_vdi" {
-  count = var.enabled ? 1 : 0
-  source       = "git::https://github.com/otc-code/blue-aws-kasm.git?ref=v1.0.0"
-  cloud_region = var.cloud_region
-  config = var.config
-  project_name               = join ("-",[var.config.prefix,var.config.environment, var.config.application])
-  num_webapps=var.num_webapps
-  num_agents=var.num_agents
-  num_cpx_nodes=var.num_cpx_nodes
+  count                      = var.enabled ? 1 : 0
+  source                     = "git::https://github.com/otc-code/blue-aws-kasm.git?ref=v1.0.0"
+  cloud_region               = var.cloud_region
+  config                     = var.config
+  project_name               = join("-", [var.config.prefix, var.config.environment, var.config.application])
+  num_webapps                = var.num_webapps
+  num_agents                 = var.num_agents
+  num_cpx_nodes              = var.num_cpx_nodes
   aws_domain_name            = var.aws_domain_name
   manager_token              = random_password.this["manager"].result
   database_password          = random_password.this["redis"].result
