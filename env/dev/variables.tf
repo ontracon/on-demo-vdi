@@ -107,18 +107,6 @@ variable "admin_password" {
   sensitive   = true
 }
 
-
-variable "anywhere" {
-  description = "Anywhere route subnet"
-  type        = string
-  default     = "0.0.0.0/0"
-
-  validation {
-    condition     = can(cidrhost(var.anywhere, 0))
-    error_message = "Anywhere variable must be valid IPv4 CIDR - usually 0.0.0.0/0 for all default routes and default Security Group access."
-  }
-}
-
 variable "ssh_authorized_keys" {
   description = "The SSH Public Keys to be installed on the compute instances"
   type        = string
