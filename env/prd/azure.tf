@@ -42,7 +42,7 @@ module "nsg" {
   config = var.config
   resource_group_name = module.resource_group_net[each.key].resource_group_name
   attach_rules = true
-  existing_security_group_name=module.vnet[each.key].subnets["vm_subnet"].name
+  existing_security_group_name=module.vnet[each.key].subnets["vm_subnet"].network_security_group_name
   security_rules = {
     rdp = {
       name                         = "inbound_3389"
