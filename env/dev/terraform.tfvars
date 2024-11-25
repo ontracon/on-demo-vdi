@@ -8,8 +8,8 @@ config = {
 aws_domain_name = "vdi.dev.ontracon.cloud"
 admin_password  = "MySecretPassword"
 num_webapps     = 2
-num_agents      = 1
-num_cpx_nodes   = 1
+num_agents      = 2
+num_cpx_nodes   = 2
 
 ssh_authorized_keys     = ""
 kasm_build              = "https://kasm-static-content.s3.amazonaws.com/kasm_release_1.16.1.6efdbd.tar.gz"
