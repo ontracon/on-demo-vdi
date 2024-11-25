@@ -41,6 +41,7 @@ jobs:
         with:
           TF_DIR: 'env/prd'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
           TF_ACTION: 'static_checks'
           GH_PR_COMMENTS: 'false'
       - name: Configure AWS Credentials (OIDC)
@@ -56,6 +57,7 @@ jobs:
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
           GH_PR_COMMENTS: 'false'
       - name: plan
         uses: otc-code/action-tofu@main
