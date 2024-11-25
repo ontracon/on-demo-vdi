@@ -29,6 +29,11 @@ jobs:
     runs-on: [ 'Linux' ]
     name: Deploy PRD
     environment: 'Production'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ON_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ON_ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ON_ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ON_ARM_SUBSCRIPTION_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
