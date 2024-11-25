@@ -66,7 +66,7 @@ jobs:
           TF_ACTION: 'plan'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: apply
-        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'on_release' }}
+        if: ${{  github.event_name == 'release' }}
         uses: otc-code/action-tofu@main
         with:
           TF_DIR: 'env/prd'
