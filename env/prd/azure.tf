@@ -25,6 +25,7 @@ module "vnet" {
   config              = var.config
   resource_group_name = module.resource_group[each.key].resource_group_name
   create_default_sg   = true
+  calculate_ipv6_private_cidr = false # Only IPv4
   subnets = {
     sub1 = {
       custom_name = "vm" # Only a vm subnet
