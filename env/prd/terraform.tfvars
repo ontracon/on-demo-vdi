@@ -18,4 +18,4 @@ cpx_hdd_size_gb         = 50
 agent_hdd_size_gb       = 50
 swap_size               = 10
 ec2_ami                 = "ami-0745b7d4092315796" # Ubuntu 22.04
-create_aws_ssm_iam_role = true
+create_aws_ssm_iam_role = false
