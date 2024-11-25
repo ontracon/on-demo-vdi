@@ -51,7 +51,7 @@ module "nsg" {
       access                       = "Allow"
       protocol                     = "Tcp"
       source_port_ranges           = ["*"]
-      destination_port_ranges      = ["3389"]
+      destination_port_ranges      = ["3389,3389"]
       source_address_prefixes      = ["0.0.0.0/0"]
       destination_address_prefixes = ["*"]
     },
@@ -62,7 +62,7 @@ module "nsg" {
       access                       = "Allow"
       protocol                     = "Tcp"
       source_port_ranges           = ["*"]
-      destination_port_ranges      = ["4902"]
+      destination_port_ranges      = ["4902,4903"]"]
       source_address_prefixes      = ["0.0.0.0/0"]
       destination_address_prefixes = ["*"]
     }
