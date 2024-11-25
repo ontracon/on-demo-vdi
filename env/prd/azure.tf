@@ -35,39 +35,39 @@ module "vnet" {
 }
 
 # Adding NSG Rules to vnet's
-module "nsg" {
-  for_each                    = toset(local.azure_locations)
-  source       = "git::https://github.com/otc-code/res-azr-nsg.git?ref=main"
-  cloud_region =each.key
-  config = var.config
-  resource_group_name = module.resource_group_net[each.key].resource_group_name
-  attach_rules = true
-  existing_security_group_name=module.vnet[each.key].subnets["vm_subnet"].network_security_group_name
-  security_rules = {
-    rdp = {
-      name                         = "inbound_3389"
-      priority                     = 100
-      direction                    = "Inbound"
-      access                       = "Allow"
-      protocol                     = "Tcp"
-      source_port_ranges           = ["*"]
-      destination_port_ranges      = ["3389"]
-      source_address_prefixes      = ["0.0.0.0/0"]
-      destination_address_prefixes = ["*"]
-    },
-    kasm = {
-      name                         = "inbound_4902"
-      priority                     = 100
-      direction                    = "Inbound"
-      access                       = "Allow"
-      protocol                     = "Tcp"
-      source_port_ranges           = ["*"]
-      destination_port_ranges      = ["4902"]
-      source_address_prefixes      = ["0.0.0.0/0"]
-      destination_address_prefixes = ["*"]
-    }
-  }
-}
+# module "nsg" {
+#   for_each                    = toset(local.azure_locations)
+#   source       = "git::https://github.com/otc-code/res-azr-nsg.git?ref=main"
+#   cloud_region =each.key
+#   config = var.config
+#   resource_group_name = module.resource_group_net[each.key].resource_group_name
+#   attach_rules = true
+#   existing_security_group_name=module.vnet[each.key].subnets["vm_subnet"].security_group_name
+#   security_rules = {
+#     rdp = {
+#       name                         = "inbound_3389"
+#       priority                     = 100
+#       direction                    = "Inbound"
+#       access                       = "Allow"
+#       protocol                     = "Tcp"
+#       source_port_ranges           = ["*"]
+#       destination_port_ranges      = ["3389"]
+#       source_address_prefixes      = ["0.0.0.0/0"]
+#       destination_address_prefixes = ["*"]
+#     },
+#     kasm = {
+#       name                         = "inbound_4902"
+#       priority                     = 100
+#       direction                    = "Inbound"
+#       access                       = "Allow"
+#       protocol                     = "Tcp"
+#       source_port_ranges           = ["*"]
+#       destination_port_ranges      = ["4902"]
+#       source_address_prefixes      = ["0.0.0.0/0"]
+#       destination_address_prefixes = ["*"]
+#     }
+#   }
+# }
 
 # Creating RG's for Pools VM
 module "resource_group" {

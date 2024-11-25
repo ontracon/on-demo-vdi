@@ -63,7 +63,7 @@ jobs:
         with:
           TF_DIR: 'env/prd'
           TF_ACTION: 'init'
-          TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
+          TF_PARAMETER: 'autopilot=aws,region=eu-central-1,upgrade'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
           GH_PR_COMMENTS: 'false'
