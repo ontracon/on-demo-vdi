@@ -5,6 +5,9 @@ on:
   release:
     types: [published]
   push:
+    branches:
+      - '**/*'
+      - '!v*' # Don't run on release branches.
     paths:
       - 'env/prd/*.tf'
       - 'env/prd/*.tfvars'

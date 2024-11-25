@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   pull_request:
   push:
+    branches:
+      - '**/*'
+      - '!v*' # Don't run on release branches.
     paths:
       - 'env/dev/*.tf'
       - 'env/dev/*.tfvars'
