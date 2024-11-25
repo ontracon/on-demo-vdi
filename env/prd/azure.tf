@@ -24,7 +24,7 @@ module "vnet" {
   source              = "git::https://github.com/otc-code/res-azr-vnet.git?ref=v1.1.1"
   cloud_region        = each.key
   config              = var.config
-  resource_group_name = module.resource_group[each.key].resource_group_net
+  resource_group_name = module.resource_group_net[each.key].resource_group_name
   create_default_sg   = true
   calculate_ipv6_private_cidr = false # Only IPv4
   subnets = {
@@ -35,7 +35,7 @@ module "vnet" {
 }
 
 # Creating RG's for Pools VM
-module "resource_group_vm" {
+module "resource_group" {
   for_each = toset(local.azure_locations)
   source       = "git::https://github.com/otc-code/res-azr-rg.git?ref=v1.0.0"
   cloud_region = each.key
