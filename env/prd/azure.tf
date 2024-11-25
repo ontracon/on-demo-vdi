@@ -37,7 +37,7 @@ module "vnet" {
 # Adding NSG Rules to vnet's
 module "nsg" {
   for_each                    = toset(local.azure_locations)
-  source       = "git::https://github.com/otc-code/res-azr-nsg.git?ref=v1.1.0"
+  source       = "git::https://github.com/otc-code/res-azr-nsg.git?ref=main"
   cloud_region =each.key
   config = var.config
   resource_group_name = module.resource_group_net[each.key].resource_group_name
