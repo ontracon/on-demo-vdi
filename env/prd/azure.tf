@@ -15,6 +15,7 @@ module "resource_group" {
   source       = "git::https://github.com/otc-code/res-azr-rg.git?ref=v1.0.0"
   cloud_region = each.key
   config       = var.config
+  custom_name="net"
 }
 
 module "vnet" {
