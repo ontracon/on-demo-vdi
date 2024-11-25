@@ -40,7 +40,8 @@ jobs:
           TF_DIR: 'env/dev'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION: 'static_checks'
-          GH_STEP_SUMMARY: 'true'
+          GH_PR_COMMENTS: 'false'
+          GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -53,13 +54,16 @@ jobs:
           TF_DIR: 'env/dev'
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
+          GH_PR_COMMENTS: 'false'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_COM_TOKEN: ${{ secrets.ORG_TOKEN }}
       - name: plan
         uses: otc-code/action-tofu@main
         with:
           TF_DIR: 'env/dev'
           TF_ACTION: 'plan'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'true'
       - name: apply
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: otc-code/action-tofu@main
@@ -67,6 +71,7 @@ jobs:
           TF_DIR: 'env/dev'
           TF_ACTION: 'apply'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'false'
       - name: destroy
         if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
         uses: otc-code/action-tofu@main
@@ -74,3 +79,4 @@ jobs:
           TF_DIR: 'env/dev'
           TF_ACTION: 'destroy'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'false'
