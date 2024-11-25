@@ -21,7 +21,7 @@ module "dev_vdi" {
   manager_token              = random_password.this["manager"].result
   database_password          = random_password.this["redis"].result
   redis_password             = random_password.this["redis"].result
-  admin_password             = var.admin_password
+  admin_password             = random_password.this["admin"].result
   user_password              = random_password.this["user"].result
   service_registration_token = random_password.this["token"].result
   ssh_authorized_keys        = var.ssh_authorized_keys
