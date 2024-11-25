@@ -1,18 +1,17 @@
-enabled      = false
+enabled      = true
 cloud_region = "eu-central-1"
 config = {
   prefix      = "on"
-  environment = "dev"
+  environment = "prd"
   application = "vdi"
 }
-aws_domain_name = "vdi.dev.ontracon.cloud"
-admin_password  = "MySecretPassword"
-num_webapps     = 2
-num_agents      = 2
-num_cpx_nodes   = 2
+aws_domain_name = "vdi.ontracon.cloud"
+num_webapps     = 1
+num_agents      = 1
+num_cpx_nodes   = 1
 
 ssh_authorized_keys     = ""
-kasm_build              = "https://kasm-static-content.s3.amazonaws.com/kasm_release_1.16.1.98d6fa.tar.gz"
+kasm_build              = "https://kasm-static-content.s3.amazonaws.com/kasm_release_1.16.1.6efdbd.tar.gz"
 db_hdd_size_gb          = 50
 webapp_hdd_size_gb      = 50
 cpx_hdd_size_gb         = 50
