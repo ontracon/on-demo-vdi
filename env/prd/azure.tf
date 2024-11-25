@@ -20,7 +20,7 @@ module "resource_group" {
 module "vnet" {
   for_each = toset(local.azure_locations)
   depends_on          = [module.resource_group]
-  source              = "git://https://github.com/otc-code/res-azr-vnet.git?ref=v1.1.1"
+  source              = "git:https://github.com/otc-code/res-azr-vnet.git?ref=v1.1.1"
   cloud_region        = each.key
   config              = var.config
   resource_group_name = module.resource_group[each.key].resource_group_name
