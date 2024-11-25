@@ -7,7 +7,7 @@ config = {
 }
 aws_domain_name = "vdi.dev.ontracon.cloud"
 admin_password  = "MySecretPassword"
-num_webapps     = 1
+num_webapps     = 2
 num_agents      = 1
 num_cpx_nodes   = 1
 
