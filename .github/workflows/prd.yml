@@ -2,6 +2,8 @@ name: Production
 on:
   workflow_dispatch:
   pull_request:
+  release:
+    types: [published]
   push:
     paths:
       - 'env/prd/*.tf'
@@ -33,13 +35,14 @@ jobs:
           TF_ACTION: 'install'
         env:
           GITHUB_COM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'false'
       - name: Static tests
         uses: otc-code/action-tofu@v1.2.2
         with:
           TF_DIR: 'env/prd'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION: 'static_checks'
-          GH_STEP_SUMMARY: 'true'
+          GH_PR_COMMENTS: 'false'
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -53,6 +56,7 @@ jobs:
           TF_ACTION: 'init'
           TF_PARAMETER: 'autopilot=aws,region=eu-central-1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'false'
       - name: plan
         uses: otc-code/action-tofu@main
         with:
@@ -60,12 +64,13 @@ jobs:
           TF_ACTION: 'plan'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: apply
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/main' github.event_name == 'on_release' }}
         uses: otc-code/action-tofu@main
         with:
           TF_DIR: 'env/prd'
           TF_ACTION: 'apply'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PR_COMMENTS: 'false'
       - name: destroy
         if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' }}
         uses: otc-code/action-tofu@main
