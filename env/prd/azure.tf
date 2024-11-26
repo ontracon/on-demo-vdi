@@ -50,19 +50,19 @@ module "nsg" {
       direction                    = "Inbound"
       access                       = "Allow"
       protocol                     = "Tcp"
-      source_port_ranges           = ["*"]
-      destination_port_ranges      = ["3389","3389"]
+      source_port_range           = "*"
+      destination_port_range      = "3389"
       source_address_prefixes      = ["0.0.0.0/0"]
       destination_address_prefixes = ["*"]
     },
     kasm = {
       name                         = "inbound_4902"
-      priority                     = 100
+      priority                     = 101
       direction                    = "Inbound"
       access                       = "Allow"
       protocol                     = "Tcp"
-      source_port_ranges           = ["*"]
-      destination_port_ranges      = ["4902"]
+      source_port_range           = "*"
+      destination_port_range      = "4902"
       source_address_prefixes      = ["0.0.0.0/0"]
       destination_address_prefixes = ["*"]
     }
