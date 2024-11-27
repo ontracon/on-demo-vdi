@@ -1,4 +1,4 @@
-enabled      = false
+enabled      = true
 cloud_region = "eu-central-1"
 config = {
   prefix      = "on"
